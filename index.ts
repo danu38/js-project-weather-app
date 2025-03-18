@@ -1,5 +1,7 @@
-const API_KEY = "648a2876b3cb745c6a8e46caeef48895";
-const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+const API_KEY : string = "648a2876b3cb745c6a8e46caeef48895";
+const city : string = "Uppsala";
+const countryCode : string = "SE";
+const API_URL: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${API_KEY}`;
 
 // Gets HTML-Elements for showcasing the weatherdata
 const temperatureElement = document.querySelector('.temperature') as HTMLElement;
