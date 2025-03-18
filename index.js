@@ -38,6 +38,7 @@ var API_KEY = "648a2876b3cb745c6a8e46caeef48895";
 var city = "Uppsala";
 var countryCode = "SE";
 var API_URL = "https://api.openweathermap.org/data/2.5/weather?q=".concat(city, "&units=metric&APPID=").concat(API_KEY);
+var API_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, "&units=metric&APPID=").concat(API_KEY);
 // Gets HTML-Elements for showcasing the weatherdata
 var temperatureElement = document.querySelector('.temperature');
 var locationElement = document.querySelector('.location');
@@ -46,7 +47,11 @@ var weatherStatusElement = document.querySelector('.weather-status');
 var weatherIconElement = document.querySelector('.weather-icon');
 var sunriseElement = document.querySelector('.sunrise-sunset span:first-of-type');
 var sunsetElement = document.querySelector('.sunrise-sunset span:last-of-type');
+//button element
 var extendedInfoButton = document.querySelector('.extendedinfo-button');
+// Extended info elements
+var upcomingDaysContainer = document.querySelector('.upcomming-days');
+var forecastContainer = document.querySelector('.forecast-container');
 // Fetches weather data from the OpenWeatherMap API
 function fetchWeather() {
     return __awaiter(this, void 0, void 0, function () {
@@ -93,3 +98,62 @@ function fetchWeather() {
     });
 }
 fetchWeather();
+function fetchForecast() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data, dailyForecast_1, processedDates_1, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, fetch(API_FORECAST_URL)];
+                case 1:
+                    response = _a.sent();
+                    if (!response.ok)
+                        throw new Error("HTTP error! Status: ".concat(response.status));
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    // Clear previous forecast data
+                    upcomingDaysContainer.innerHTML = "";
+                    dailyForecast_1 = [];
+                    processedDates_1 = new Set();
+                    data.list.forEach(function (item) {
+                        var date = new Date(item.dt_txt);
+                        var day = date.toLocaleDateString("en-US", { weekday: "short" });
+                        if (!processedDates_1.has(day) && item.dt_txt.includes("12:00:00")) {
+                            processedDates_1.add(day);
+                            dailyForecast_1.push(item);
+                        }
+                    });
+                    // Loop through the filtered forecast data and display it
+                    dailyForecast_1.slice(0, 4).forEach(function (day) {
+                        var date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
+                        var tempMax = Math.round(day.main.temp_max);
+                        var tempMin = Math.round(day.main.temp_min);
+                        var icon = day.weather[0].icon;
+                        // Create forecast row
+                        var forecastRow = document.createElement("div");
+                        forecastRow.classList.add("forecast-day");
+                        forecastRow.innerHTML = "\n                <p>".concat(date, "</p>\n                <img src=\"https://openweathermap.org/img/wn/").concat(icon, "@2x.png\" alt=\"Weather icon\">\n                <p>").concat(tempMax, "\u00B0 / ").concat(tempMin, "\u00B0C</p>\n            ");
+                        upcomingDaysContainer.appendChild(forecastRow);
+                    });
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_2 = _a.sent();
+                    console.error("Error fetching forecast data:", error_2);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+//fetchForecast();
+// Toggle Forecast on Button Click
+extendedInfoButton.addEventListener('click', function () {
+    forecastContainer.classList.toggle('show');
+    extendedInfoButton.classList.toggle('rotate');
+    // Fetch forecast only when opening
+    if (forecastContainer.classList.contains('show')) {
+        fetchForecast();
+    }
+});
