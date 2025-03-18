@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="weather-container">
+    <!--  <div class="menu-bar">
+                                  <div class="menu-icon">&#9776;</div>
+                                  </div> -->
+    <section class="weather-info">
+      <div class="temperature"></div>
+      <div class="location"></div>
+      <div class="location-time"></div>
+      <div class="weather-status"></div>
+      <div class="weather-icon"></div>
+    </section>
+
+      <section class="sunrise-sunset">
+        <p>Sunrise <span class="sunrise-time">22:30</span></p>
+        <p>Sunset <span class="sunset-time">00:00</span></p>
+      </section>
+
+      <section class="button-container">
+        <button class="extendedinfo-button"></button>
+      </section>
+
+      <section class="upcomming-days">
+        <p><span class="day"></span></p>
+        <p><span class="image"></span></p>
+        <p><span class="temperature"></span></p>
+      </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
