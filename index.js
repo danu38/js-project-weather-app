@@ -101,4 +101,11 @@ function fetchWeather() {
         });
     });
 }
+// Toggle the upcoming days section with an animation
+extendedInfoButton.addEventListener("click", function () {
+    // Toggle the class 'show' to open/close the upcoming days
+    upcomingDays.classList.toggle("show");
+    // Toggle the active class to rotate the arrow
+    extendedInfoButton.classList.toggle("active");
+});
 fetchWeather();

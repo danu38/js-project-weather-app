@@ -58,6 +58,8 @@ async function fetchWeather() {
         console.log(data);
     } catch (error) {
         console.error(error);
+    }
+}
 
 // Toggle the upcoming days section with an animation
 extendedInfoButton.addEventListener("click", () => {
