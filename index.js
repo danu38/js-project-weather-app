@@ -40,19 +40,17 @@ var countryCode = "SE";
 var API_URL = "https://api.openweathermap.org/data/2.5/weather?q=".concat(city, "&units=metric&APPID=").concat(API_KEY);
 var API_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast?q=".concat(city, "&units=metric&APPID=").concat(API_KEY);
 // Gets HTML-Elements for showcasing the weatherdata
-var temperatureElement = document.querySelector('.temperature');
-var locationElement = document.querySelector('.location');
-var locationTimeElement = document.querySelector('.location-time');
-var weatherStatusElement = document.querySelector('.weather-status');
-var weatherIconElement = document.querySelector('.weather-icon');
-
-var sunriseElement = document.querySelector('.sunrise-time');
-var sunsetElement = document.querySelector('.sunset-time');
-
-var extendedInfoButton = document.querySelector('.extendedinfo-button');
+var temperatureElement = document.querySelector(".temperature");
+var locationElement = document.querySelector(".location");
+var locationTimeElement = document.querySelector(".location-time");
+var weatherStatusElement = document.querySelector(".weather-status");
+var weatherIconElement = document.querySelector(".weather-icon");
+var sunriseElement = document.querySelector(".sunrise-time");
+var sunsetElement = document.querySelector(".sunset-time");
+var extendedInfoButton = document.querySelector(".extendedinfo-button");
 // Extended info elements
-var upcomingDaysContainer = document.querySelector('.upcomming-days');
-var forecastContainer = document.querySelector('.forecast-container');
+var upcomingDaysContainer = document.querySelector(".upcomming-days");
+var forecastContainer = document.querySelector(".forecast-container");
 // Fetches weather data from the OpenWeatherMap API
 function fetchWeather() {
     return __awaiter(this, void 0, void 0, function () {
@@ -78,23 +76,23 @@ function fetchWeather() {
                     location_1 = data.name;
                     locationElement.innerHTML = location_1;
                     locationTime = new Date(data.dt * 1000);
-                    locationTimeElement.innerHTML = locationTime.toLocaleTimeString('sv-SE', {
-                        hour: '2-digit',
-                        minute: '2-digit'
+                    locationTimeElement.innerHTML = locationTime.toLocaleTimeString("sv-SE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
                     });
                     weatherStatus = data.weather[0].description;
                     weatherStatusElement.innerHTML = weatherStatus.charAt(0).toUpperCase() + weatherStatus.slice(1);
                     weatherIcon = "https://openweathermap.org/img/wn/".concat(data.weather[0].icon, ".png");
                     weatherIconElement.innerHTML = "<img src=\"".concat(weatherIcon, "\" alt=\"Weather Icon\">");
                     sunrise = new Date(data.sys.sunrise * 1000);
-                    sunriseElement.innerHTML = sunrise.toLocaleTimeString('sv-SE', {
-                        hour: '2-digit',
-                        minute: '2-digit'
+                    sunriseElement.innerHTML = sunrise.toLocaleTimeString("sv-SE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
                     });
                     sunset = new Date(data.sys.sunset * 1000);
-                    sunsetElement.innerHTML = sunset.toLocaleTimeString('sv-SE', {
-                        hour: '2-digit',
-                        minute: '2-digit'
+                    sunsetElement.innerHTML = sunset.toLocaleTimeString("sv-SE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
                     });
                     console.log(data);
                     return [3 /*break*/, 4];
@@ -107,13 +105,6 @@ function fetchWeather() {
         });
     });
 }
-// Toggle the upcoming days section with an animation
-extendedInfoButton.addEventListener("click", function () {
-    // Toggle the class 'show' to open/close the upcoming days
-    upcomingDays.classList.toggle("show");
-    // Toggle the active class to rotate the arrow
-    extendedInfoButton.classList.toggle("active");
-});
 fetchWeather();
 function fetchForecast() {
     return __awaiter(this, void 0, void 0, function () {
@@ -143,7 +134,7 @@ function fetchForecast() {
                         }
                     });
                     // Loop through the filtered forecast data and display it
-                    dailyForecast_1.slice(0, 4).forEach(function (day) {
+                    dailyForecast_1.slice(1, 5).forEach(function (day) {
                         var date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
                         var tempMax = Math.round(day.main.temp_max);
                         var tempMin = Math.round(day.main.temp_min);
@@ -164,13 +155,12 @@ function fetchForecast() {
         });
     });
 }
-//fetchForecast();
 // Toggle Forecast on Button Click
-extendedInfoButton.addEventListener('click', function () {
-    forecastContainer.classList.toggle('show');
-    extendedInfoButton.classList.toggle('rotate');
+extendedInfoButton.addEventListener("click", function () {
+    forecastContainer.classList.toggle("show");
+    extendedInfoButton.classList.toggle("rotate");
     // Fetch forecast only when opening
-    if (forecastContainer.classList.contains('show')) {
+    if (forecastContainer.classList.contains("show")) {
         fetchForecast();
     }
 });

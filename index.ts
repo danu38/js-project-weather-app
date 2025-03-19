@@ -94,7 +94,7 @@ async function fetchForecast() {
     });
 
     // Loop through the filtered forecast data and display it
-    dailyForecast.slice(0, 4).forEach((day) => {
+    dailyForecast.slice(1, 5).forEach((day) => {
       const date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
       const tempMax = Math.round(day.main.temp_max);
       const tempMin = Math.round(day.main.temp_min);
