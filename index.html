@@ -12,38 +12,36 @@
     rel="stylesheet"
     href="style.css"
   />
+  
 </head>
 
-<body>
-  <main class="weather-container">
-    <!--  <div class="menu-bar">
-                                  <div class="menu-icon">&#9776;</div>
-                                  </div> -->
-    <section class="weather-info">
-      <div class="temperature"></div>
-      <div class="location"></div>
-      <div class="location-time"></div>
-      <div class="weather-status"></div>
-      <div class="weather-icon"></div>
-    </section>
+  <body>
+    <main class="weather-container">
+      <section class="weather-info">
+        <div class="temperature"></div>
+        <div class="location"></div>
+        <div class="location-time"></div>
+        <div class="weather-status"></div>
+        <div class="weather-icon"></div>
+      </section>
 
     <section class="sunrise-sunset">
       <p>sunrise <span class="sunrise-time"></span></p>
       <p>sunset <span class="sunset-time"></span></p>
     </section>
 
-    <section class="button-container">
-      <button class="extendedinfo-button"></button>
-    </section>
+      <!-- Button with arrow only -->
+      <section class="button-container">
+        <button class="extendedinfo-button">
+          <span class="arrow">↓</span>
+        </button>
+      </section>
 
-    <section class="upcomming-days">
-      <p><span class="day"></span></p>
-      <p><span class="image"></span></p>
-      <p><span class="temperature"></span></p>
-    </section>
-  </main>
+      <section class="upcoming-days" id="upcomingDays">
+        <!-- Upcoming days will be added dynamically here -->
+      </section>
+    </main>
 
-  <script src="index.js"></script>
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>
