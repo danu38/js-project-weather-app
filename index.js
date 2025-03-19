@@ -45,9 +45,10 @@ var locationElement = document.querySelector('.location');
 var locationTimeElement = document.querySelector('.location-time');
 var weatherStatusElement = document.querySelector('.weather-status');
 var weatherIconElement = document.querySelector('.weather-icon');
-var sunriseElement = document.querySelector('.sunrise-sunset span:first-of-type');
-var sunsetElement = document.querySelector('.sunrise-sunset span:last-of-type');
-//button element
+
+var sunriseElement = document.querySelector('.sunrise-time');
+var sunsetElement = document.querySelector('.sunset-time');
+
 var extendedInfoButton = document.querySelector('.extendedinfo-button');
 // Extended info elements
 var upcomingDaysContainer = document.querySelector('.upcomming-days');
@@ -73,19 +74,28 @@ function fetchWeather() {
                     data = _a.sent();
                     temperature = data.main.temp;
                     console.log(temperature);
-                    temperatureElement.innerHTML = "".concat(temperature, "\u00B0C");
+                    temperatureElement.innerHTML = "".concat(Math.round(temperature), "\u00B0C");
                     location_1 = data.name;
                     locationElement.innerHTML = location_1;
-                    locationTime = new Date(data.dt * 1000).toLocaleTimeString();
-                    locationTimeElement.innerHTML = locationTime;
+                    locationTime = new Date(data.dt * 1000);
+                    locationTimeElement.innerHTML = locationTime.toLocaleTimeString('sv-SE', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
                     weatherStatus = data.weather[0].description;
-                    weatherStatusElement.innerHTML = weatherStatus;
+                    weatherStatusElement.innerHTML = weatherStatus.charAt(0).toUpperCase() + weatherStatus.slice(1);
                     weatherIcon = "https://openweathermap.org/img/wn/".concat(data.weather[0].icon, ".png");
                     weatherIconElement.innerHTML = "<img src=\"".concat(weatherIcon, "\" alt=\"Weather Icon\">");
-                    sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
-                    sunriseElement.innerHTML = sunrise;
-                    sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
-                    sunsetElement.innerHTML = sunset;
+                    sunrise = new Date(data.sys.sunrise * 1000);
+                    sunriseElement.innerHTML = sunrise.toLocaleTimeString('sv-SE', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    sunset = new Date(data.sys.sunset * 1000);
+                    sunsetElement.innerHTML = sunset.toLocaleTimeString('sv-SE', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
                     console.log(data);
                     return [3 /*break*/, 4];
                 case 3:
@@ -97,6 +107,13 @@ function fetchWeather() {
         });
     });
 }
+// Toggle the upcoming days section with an animation
+extendedInfoButton.addEventListener("click", function () {
+    // Toggle the class 'show' to open/close the upcoming days
+    upcomingDays.classList.toggle("show");
+    // Toggle the active class to rotate the arrow
+    extendedInfoButton.classList.toggle("active");
+});
 fetchWeather();
 function fetchForecast() {
     return __awaiter(this, void 0, void 0, function () {

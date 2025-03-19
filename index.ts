@@ -10,9 +10,9 @@ const locationElement = document.querySelector('.location') as HTMLElement;
 const locationTimeElement = document.querySelector('.location-time') as HTMLElement;
 const weatherStatusElement = document.querySelector('.weather-status') as HTMLElement;
 const weatherIconElement = document.querySelector('.weather-icon') as HTMLElement;
-const sunriseElement = document.querySelector('.sunrise-sunset span:first-of-type') as HTMLElement;
-const sunsetElement = document.querySelector('.sunrise-sunset span:last-of-type') as HTMLElement;
-//button element
+const sunriseElement = document.querySelector('.sunrise-time') as HTMLElement;
+const sunsetElement = document.querySelector('.sunset-time') as HTMLElement;
+
 const extendedInfoButton = document.querySelector('.extendedinfo-button') as HTMLElement;
 
 // Extended info elements
@@ -36,27 +36,50 @@ async function fetchWeather() {
 
         const temperature = data.main.temp;
         console.log(temperature);
-        temperatureElement.innerHTML = `${temperature}°C`;
+        temperatureElement.innerHTML = `${Math.round(temperature)}°C`;
+
         const location = data.name;
         locationElement.innerHTML = location;
-        const locationTime = new Date(data.dt * 1000).toLocaleTimeString(); // Lokaltid
-        locationTimeElement.innerHTML = locationTime;
+
+        const locationTime = new Date(data.dt * 1000);
+        locationTimeElement.innerHTML = locationTime.toLocaleTimeString('sv-SE', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
         const weatherStatus = data.weather[0].description;
-        weatherStatusElement.innerHTML = weatherStatus;
+        weatherStatusElement.innerHTML = weatherStatus.charAt(0).toUpperCase() + weatherStatus.slice(1);
+
         const weatherIcon = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
         weatherIconElement.innerHTML = `<img src="${weatherIcon}" alt="Weather Icon">`;
 
-        const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
-        sunriseElement.innerHTML = sunrise;
 
-        const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
-        sunsetElement.innerHTML = sunset;
+        const sunrise = new Date(data.sys.sunrise * 1000);
+        sunriseElement.innerHTML = sunrise.toLocaleTimeString('sv-SE', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        const sunset = new Date(data.sys.sunset * 1000);
+        sunsetElement.innerHTML = sunset.toLocaleTimeString('sv-SE', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
         console.log(data);
     } catch (error) {
         console.error(error);
     }
 }
 
+// Toggle the upcoming days section with an animation
+extendedInfoButton.addEventListener("click", () => {
+  // Toggle the class 'show' to open/close the upcoming days
+  upcomingDays.classList.toggle("show");
+
+  // Toggle the active class to rotate the arrow
+  extendedInfoButton.classList.toggle("active");
+});
 
 fetchWeather();
 
@@ -105,10 +128,6 @@ async function fetchForecast() {
         console.error("Error fetching forecast data:", error);
     }
 }
-
-//fetchForecast();
-
-
 
 // Toggle Forecast on Button Click
 extendedInfoButton.addEventListener('click', () => {

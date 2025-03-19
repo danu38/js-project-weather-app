@@ -3,41 +3,44 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
   <title>Weather</title>
-  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
+  
 </head>
 
-<body>
-  <main class="weather-container">
-    <!--  <div class="menu-bar">
-                                  <div class="menu-icon">&#9776;</div>
-                                  </div> -->
-    <section class="weather-info">
-      <div class="temperature"></div>
-      <div class="location"></div>
-      <div class="location-time"></div>
-      <div class="weather-status"></div>
-      <div class="weather-icon"></div>
-    </section>
+  <body>
+    <main class="weather-container">
+      <section class="weather-info">
+        <div class="temperature"></div>
+        <div class="location"></div>
+        <div class="location-time"></div>
+        <div class="weather-status"></div>
+        <div class="weather-icon"></div>
+      </section>
 
-    <section class="sunrise-sunset">
-      <p>Sunrise <span class="sunrise-time">22:30</span></p>
-      <p>Sunset <span class="sunset-time">00:00</span></p>
+     <section class="sunrise-sunset">
+      <p>sunrise <span class="sunrise-time"></span></p>
+      <p>sunset <span class="sunset-time"></span></p>
     </section>
-
+      
     <section class="button-container">
       <button class="extendedinfo-button"><img src="./assets/arrow.png" alt="Expand"></button>
     </section>
 
+   <!-- check this later div/section thingy -->  
     <div class="forecast-container">
       <section class="upcomming-days"></section>
     </div>
 
-    </section>
-  </main>
+    </main>
 
-  <script src="index.js"></script>
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>
