@@ -108,7 +108,7 @@ function fetchWeather() {
 fetchWeather();
 function fetchForecast() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, dailyForecast_1, processedDates_1, error_2;
+        var response, data, dailyForecast_1, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -121,28 +121,28 @@ function fetchForecast() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
-                    // Clear previous forecast data
                     upcomingDaysContainer.innerHTML = "";
-                    dailyForecast_1 = [];
-                    processedDates_1 = new Set();
+                    dailyForecast_1 = {};
                     data.list.forEach(function (item) {
-                        var date = new Date(item.dt_txt);
-                        var day = date.toLocaleDateString("en-US", { weekday: "short" });
-                        if (!processedDates_1.has(day) && item.dt_txt.includes("12:00:00")) {
-                            processedDates_1.add(day);
-                            dailyForecast_1.push(item);
+                        var date = new Date(item.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
+                        var temp = item.main.temp;
+                        var icon = item.weather[0].icon;
+                        if (!dailyForecast_1[date]) {
+                            dailyForecast_1[date] = { tempMax: temp, tempMin: temp, icon: icon };
+                        }
+                        else {
+                            dailyForecast_1[date].tempMax = Math.max(dailyForecast_1[date].tempMax, temp);
+                            dailyForecast_1[date].tempMin = Math.min(dailyForecast_1[date].tempMin, temp);
                         }
                     });
-                    // Loop through the filtered forecast data and display it
-                    dailyForecast_1.slice(1, 5).forEach(function (day) {
-                        var date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
-                        var tempMax = Math.round(day.main.temp_max);
-                        var tempMin = Math.round(day.main.temp_min);
-                        var icon = day.weather[0].icon;
-                        // Create forecast row
+                    // Loop through forecast and display next 4 days
+                    Object.entries(dailyForecast_1)
+                        .slice(1, 5)
+                        .forEach(function (_a) {
+                        var day = _a[0], forecast = _a[1];
                         var forecastRow = document.createElement("div");
                         forecastRow.classList.add("forecast-day");
-                        forecastRow.innerHTML = "\n                <p>".concat(date, "</p>\n                <img src=\"https://openweathermap.org/img/wn/").concat(icon, "@2x.png\" alt=\"Weather icon\">\n                <p>").concat(tempMax, "\u00B0 / ").concat(tempMin, "\u00B0C</p>\n            ");
+                        forecastRow.innerHTML = "\n                    <p>".concat(day, "</p>\n                    <img src=\"https://openweathermap.org/img/wn/").concat(forecast.icon, "@2x.png\" alt=\"Weather icon\">\n                    <p>").concat(Math.round(forecast.tempMax), "\u00B0 / ").concat(Math.round(forecast.tempMin), "\u00B0C</p>\n                ");
                         upcomingDaysContainer.appendChild(forecastRow);
                     });
                     return [3 /*break*/, 4];

@@ -71,49 +71,55 @@ async function fetchWeather() {
 fetchWeather();
 
 async function fetchForecast() {
-  try {
-    const response = await fetch(API_FORECAST_URL);
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    const data = await response.json();
+    try {
+        const response = await fetch(API_FORECAST_URL);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await response.json();
 
-    // Clear previous forecast data
-    upcomingDaysContainer.innerHTML = "";
+        upcomingDaysContainer.innerHTML = "";
 
-    // Filter forecast data to get one entry per day (Noon time)
-    const dailyForecast: any[] = [];
-    const processedDates = new Set();
+        // Define the structure for storing daily forecast
+        type ForecastData = {
+            tempMax: number;
+            tempMin: number;
+            icon: string;
+        };
 
-    data.list.forEach((item: any) => {
-      const date = new Date(item.dt_txt);
-      const day = date.toLocaleDateString("en-US", { weekday: "short" });
+        // Object to store daily temperatures
+        const dailyForecast: Record<string, ForecastData> = {};
 
-      if (!processedDates.has(day) && item.dt_txt.includes("12:00:00")) {
-        processedDates.add(day);
-        dailyForecast.push(item);
-      }
-    });
+        data.list.forEach((item: any) => {
+            const date = new Date(item.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
+            const temp = item.main.temp;
+            const icon = item.weather[0].icon;
 
-    // Loop through the filtered forecast data and display it
-    dailyForecast.slice(1, 5).forEach((day) => {
-      const date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
-      const tempMax = Math.round(day.main.temp_max);
-      const tempMin = Math.round(day.main.temp_min);
-      const icon = day.weather[0].icon;
+            if (!dailyForecast[date]) {
+                dailyForecast[date] = { tempMax: temp, tempMin: temp, icon };
+            } else {
+                dailyForecast[date].tempMax = Math.max(dailyForecast[date].tempMax, temp);
+                dailyForecast[date].tempMin = Math.min(dailyForecast[date].tempMin, temp);
+            }
+        });
 
-      // Create forecast row
-      const forecastRow = document.createElement("div");
-      forecastRow.classList.add("forecast-day");
-      forecastRow.innerHTML = `
-                <p>${date}</p>
-                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather icon">
-                <p>${tempMax}° / ${tempMin}°C</p>
-            `;
-      upcomingDaysContainer.appendChild(forecastRow);
-    });
-  } catch (error) {
-    console.error("Error fetching forecast data:", error);
-  }
+        // Loop through forecast and display next 4 days
+        Object.entries(dailyForecast)
+            .slice(1, 5)
+            .forEach(([day, forecast]: [string, ForecastData]) => {
+                const forecastRow = document.createElement("div");
+                forecastRow.classList.add("forecast-day");
+                forecastRow.innerHTML = `
+                    <p>${day}</p>
+                    <img src="https://openweathermap.org/img/wn/${forecast.icon}@2x.png" alt="Weather icon">
+                    <p>${Math.round(forecast.tempMax)}° / ${Math.round(forecast.tempMin)}°C</p>
+                `;
+                upcomingDaysContainer.appendChild(forecastRow);
+            });
+
+    } catch (error) {
+        console.error("Error fetching forecast data:", error);
+    }
 }
+
 
 // Toggle Forecast on Button Click
 extendedInfoButton.addEventListener("click", () => {
