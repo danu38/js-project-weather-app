@@ -152,36 +152,7 @@ body {
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Responsive Styling for small screens */
-@media (max-width: 480px) {
-  .weather-container {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
-  .temperature {
-    font-size: 55px;
-  }
-
-  .weather-status {
-    font-size: 18px;
-  }
-
-  .weather-icon img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .extendedinfo-button {
-    font-size: 32px;
-    padding: 10px 15px;
-  }
-}
-
-/* Responsive Styling */
+/* Responsive Styling for very small screens (320px and below) */
 @media (max-width: 320px) {
   .weather-container {
     width: 95%;
@@ -198,6 +169,7 @@ body {
   }
 }
 
+/* Responsive Styling for small screens (up to 480px) */
 @media (max-width: 480px) {
   .weather-container {
     padding: 20px;
@@ -213,6 +185,7 @@ body {
   }
 }
 
+/* Responsive Styling for tablets (up to 768px) */
 @media (max-width: 768px) {
   .weather-container {
     width: 85%;
@@ -224,6 +197,7 @@ body {
   }
 }
 
+/* Responsive Styling for desktops (1024px and above) */
 @media (min-width: 1024px) {
   .weather-container {
     width: 400px;
@@ -231,6 +205,7 @@ body {
   }
 }
 
+/* Responsive Styling for large screens (1600px and above) */
 @media (min-width: 1600px) {
   .weather-container {
     width: 400px;
