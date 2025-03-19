@@ -79,15 +79,23 @@ body {
 .button-container {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  width: 100%;
 }
 
+/* Extended info button styling */
+.extendedinfo-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Extended info button image styling */
 .extendedinfo-button img {
   background-color: transparent;
-  width: 20px;
-  height: 20px;
+  width: 60px;
+  height: 60px;
   transition: transform 0.3s;
-  background: none;
   mix-blend-mode: multiply;
 }
 
