@@ -3,56 +3,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
   background-color: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #cce7ff, #b3d9ff); /* Soft gradient background */
+  background: linear-gradient(135deg, #cce7ff, #b3d9ff)
+    /* Soft gradient background */
+
 }
 
 /* Weather container styling */
 .weather-container {
-  background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Slight transparency */
   border-radius: 15px;
   padding: 40px 30px;
   width: 100%;
   max-width: 400px;
-  text-align: center;
+  text-align: c;
   width: 350px;
-}
-
-.forecast-day {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.forecast-day p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.forecast-day img {
-  width: 30px;
-  height: 30px;
-  
-}
-
-.forecast-container {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
-}
-
-.forecast-container.show {
-  max-height: 500px;
+  background: linear-gradient(to top, #3f3faa, #c3c9f2);
 }
 
 .extendedinfo-button {
@@ -68,9 +44,10 @@ body {
 
 /* Temperature styling */
 .temperature {
-  font-size: 80px;
+  font-size: 50px;
   font-weight: bold;
   color: #1e3d58;
+  align-items: flex-start;
 }
 
 /* Weather status */
@@ -78,6 +55,7 @@ body {
   font-size: 22px;
   color: #55a0b4;
   margin: 20px 0;
+  align-items: left;
 }
 
 /* Weather icon styling */
@@ -118,9 +96,9 @@ body {
   transform: rotate(90deg);
 }
 
-/* Upcoming days section (hidden by default) */
 #upcomingDays {
-  max-height: 0; /* Initially hidden */
+  max-height: 0;
+  /* Initially hidden */
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
   padding: 10px 0;
@@ -128,31 +106,35 @@ body {
 }
 
 #upcomingDays.show {
-  max-height: 300px; /* Adjust the max-height as needed, we'll see when the api works for it*/
+  max-height: 300px;
+  /* Adjust the max-height as needed, we'll see when the api works for it*/
 }
 
-/* Horizontal separator line (blue) */
-.separator {
-  height: 2px; /* Thickness of the line */
-  background-color: #3498db; /* Blue color */
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
+/* Upcoming days section (hidden by default) */
+.forecast-day {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Upcoming days text */
-.upcoming-days p {
-  font-size: 16px;
-  color: white;
-  margin: 5px 0;
+.forecast-day p {
+  margin: 0;
+  font-size: 14px;
 }
 
-.upcoming-days .day {
-  font-weight: bold;
+.forecast-day img {
+  width: 30px;
+  height: 30px;
+
 }
 
-.upcoming-days .temperature {
-  color: #e74c3c;
+.forecast-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+.forecast-container.show {
+  max-height: 500px;
 }
 
 /* Animations */
@@ -161,6 +143,7 @@ body {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);

@@ -38,12 +38,6 @@ async function fetchWeather() {
     const location = data.name;
     locationElement.innerHTML = location;
 
-  /*   const localTime = new Date();
-    locationTimeElement.innerHTML = localTime.toLocaleTimeString("sv-SE", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });  */
-    
     const locationTime = new Date(data.dt * 1000);
     locationTimeElement.innerHTML = locationTime.toLocaleTimeString("sv-SE", {
       hour: "2-digit",
