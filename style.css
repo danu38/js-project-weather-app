@@ -23,6 +23,44 @@ body {
   width: 100%;
   max-width: 400px;
   text-align: center;
+  width: 350px;
+}
+
+.forecast-day {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.forecast-day p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.forecast-day img {
+  width: 30px;
+  height: 30px;
+}
+
+.forecast-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.forecast-container.show {
+  max-height: 500px;
+}
+
+.extendedinfo-button {
+  background-color: #757AFF;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
 }
@@ -66,29 +104,17 @@ body {
   justify-content: center;
 }
 
-.extendedinfo-button {
-  background-color: #3498db; /* This is the dropdown color btw temporary only */
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px; /* Button size */
-  height: 60px; /* Button size */
-  font-size: 28px; /* Increase font size for the arrow */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease; /* Transition for rotation and color */
+.extendedinfo-button img {
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s;
+  background: none;
+  mix-blend-mode: multiply;
 }
 
-/* Hover effect for button */
-.extendedinfo-button:hover {
-  background-color: #2980b9;
-}
-
-/* Hover effect for the arrow */
-.extendedinfo-button:hover .arrow {
-  color: #ffffff; /* Change arrow color to white on hover */
+.extendedinfo-button.rotate img {
+  transform: rotate(90deg);
 }
 
 /* Upcoming days section (hidden by default) */
