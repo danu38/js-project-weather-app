@@ -24,7 +24,6 @@ body {
   /* padding: 40px 30px; */
   width: 100%;
   max-width: 400px;
-  text-align: c;
   width: 350px;
   background: linear-gradient(to top, #3f3faa, #c3c9f2);
 }
@@ -49,22 +48,33 @@ body {
 .temperature {
   font-size: 50px;
   font-weight: bold;
-  color: #1e3d58;
+  color: white;
   align-items: flex-start;
 }
 
 /* Weather status */
+.weather-status-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .weather-status {
   font-size: 22px;
-  color: #55a0b4;
+  color: white;
   margin: 20px 0;
   align-items: left;
 }
 
+.location,
+.location-time {
+  color: white;
+}
+
 /* Weather icon styling */
 .weather-icon img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 10px;
 }
 
@@ -75,8 +85,13 @@ body {
   justify-content: space-around;
   padding: 40px 30px;
   font-size: 18px;
-  color: #444;
+  color: white;
   margin-top: 20px;
+}
+
+.sunrise-sunset p {
+  font-weight: 300;
+  ;
 }
 
 .sunrise-sunset span {
@@ -86,6 +101,7 @@ body {
 /* Button container for upcoming days dropdown */
 .button-container {
   margin-top: 20px;
+  padding-right: 24px;
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -161,6 +177,7 @@ body {
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
 }
+
 .forecast-container.show {
   max-height: 500px;
 }
