@@ -8,7 +8,6 @@
 }
 
 body {
-  background-color: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,12 +21,17 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   /* Slight transparency */
   border-radius: 15px;
-  padding: 40px 30px;
+  /* padding: 40px 30px; */
   width: 100%;
   max-width: 400px;
   text-align: c;
   width: 350px;
   background: linear-gradient(to top, #3f3faa, #c3c9f2);
+}
+
+.weather-info {
+  margin: 60px;
+  margin-bottom: 24px;
 }
 
 .extendedinfo-button {
@@ -66,6 +70,10 @@ body {
 
 /* Sunrise and Sunset styling */
 .sunrise-sunset {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 40px 30px;
   font-size: 18px;
   color: #444;
   margin-top: 20px;
@@ -103,30 +111,44 @@ body {
   transform: rotate(90deg);
 }
 
-#upcomingDays {
+/* Forecast*/
+.forecast-container {
   max-height: 0;
-  /* Initially hidden */
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
-  padding: 10px 0;
-  background-color: #34495e;
+  margin-top: 24px;
+  padding: 0 24px;
+  background: white;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
 }
 
-#upcomingDays.show {
-  max-height: 300px;
-  /* Adjust the max-height as needed, we'll see when the api works for it*/
+.forecast-container.show {
+  max-height: 500px;
+  margin-top: 24px;
+  padding: 24px;
+  background: white;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
 }
+
+
 
 /* Upcoming days section (hidden by default) */
 .forecast-day {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 16px;
 }
 
 .forecast-day p {
-  margin: 0;
-  font-size: 14px;
+  margin: 8px 0;
+  font-size: 16px;
+  font-weight: 300;
+  color: #707070;
+  width: 70px;
+  ;
 }
 
 .forecast-day img {
