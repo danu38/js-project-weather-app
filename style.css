@@ -33,7 +33,7 @@ body {
   margin-bottom: 24px;
 }
 
-.extendedinfo-button {
+/* .extendedinfo-button {
   background-color: #757aff;
   border: none;
   padding: 10px;
@@ -42,7 +42,7 @@ body {
   height: 50px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
-}
+} */
 
 /* Temperature styling */
 .temperature {
@@ -102,9 +102,13 @@ body {
 .button-container {
   margin-top: 20px;
   padding-right: 24px;
+  padding-bottom: 30px;
   display: flex;
   justify-content: flex-end;
   width: 100%;
+
+  background-color: transparent;
+  position: relative;
 }
 
 /* Extended info button styling */
@@ -112,6 +116,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+  margin-bottom: -24px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: none;
 }
 
 /* Extended info button image styling */
